@@ -1,5 +1,6 @@
 package com.hugo.evoluum.repository;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,7 +24,9 @@ public class IbgeRepository {
 	}
 	
 	public List<Municipio> findAllMunicipios(String UF) throws BadAttributeValueExpException {
-		List<Municipio> municipios = Arrays.asList(restTemplate.getForObject(
+		List<Municipio> municipios = new ArrayList<>();
+		
+		municipios = Arrays.asList(restTemplate.getForObject(
 				"https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + UF + "/municipios", Municipio[].class));
 		
 		if(municipios.isEmpty())
