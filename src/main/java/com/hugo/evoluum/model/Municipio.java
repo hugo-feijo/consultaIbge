@@ -2,16 +2,24 @@ package com.hugo.evoluum.model;
 
 public class Municipio {
 
-	private Long id;
+	private long id;
 	private String nome;
 	private Microrregiao microrregiao;
+	
 	public Municipio() {
-		super();
+
 	}
-	public Long getId() {
+	
+	public Municipio(long id, String nome, Microrregiao microrregiao) {
+		this.id = id;
+		this.nome = nome;
+		this.microrregiao = microrregiao;
+	}
+
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getNome() {

@@ -2,7 +2,7 @@ package com.hugo.evoluum.model;
 
 public class Microrregiao {
 
-	private Long id;
+	private long id;
 	private String nome;
 	private Mesorregiao mesorregiao;
 	
@@ -10,11 +10,17 @@ public class Microrregiao {
 		
 	}
 
-	public Long getId() {
+	public Microrregiao(long id, String nome, Mesorregiao mesorregiao) {
+		this.id = id;
+		this.nome = nome;
+		this.mesorregiao = mesorregiao;
+	}
+
+	public long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

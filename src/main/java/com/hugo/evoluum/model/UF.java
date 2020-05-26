@@ -2,18 +2,26 @@ package com.hugo.evoluum.model;
 
 public class UF {
 
-	private Long id;
+	private long id;
 	private String sigla;
 	private String nome;
 	private Regiao regiao;
 	
 	public UF() {
+	
 	}
 	
-	public Long getId() {
+	public UF(long id, String sigla, String nome, Regiao regiao) {
+		this.id = id;
+		this.sigla = sigla;
+		this.nome = nome;
+		this.regiao = regiao;
+	}
+
+	public long getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getSigla() {

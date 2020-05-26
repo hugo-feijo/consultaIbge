@@ -2,7 +2,7 @@ package com.hugo.evoluum.model.projection;
 
 public class DadoFormatado {
 
-	private Long idEstado;
+	private long idEstado;
 	private String siglaEstado;
 	private String regiaoNome;
 	private String nomeCidade;
@@ -13,10 +13,10 @@ public class DadoFormatado {
 		super();
 	}
 	
-	public Long getIdEstado() {
+	public long getIdEstado() {
 		return idEstado;
 	}
-	public void setIdEstado(Long idEstado) {
+	public void setIdEstado(long idEstado) {
 		this.idEstado = idEstado;
 	}
 	public String getSiglaEstado() {

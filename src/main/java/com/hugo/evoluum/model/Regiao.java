@@ -5,15 +5,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Regiao {
 
-	private Long id;
+	private long id;
 
 	private String sigla;
 
 	private String nome;
 	
 	public Regiao() {
-		super();
+	
 	}
+	
+	public Regiao(long id, String sigla, String nome) {
+		this.id = id;
+		this.sigla = sigla;
+		this.nome = nome;
+	}
+
 	public long getId() {
 		return id;
 	}
