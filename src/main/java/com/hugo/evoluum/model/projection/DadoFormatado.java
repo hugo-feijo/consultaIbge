@@ -51,6 +51,58 @@ public class DadoFormatado {
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (idEstado ^ (idEstado >>> 32));
+		result = prime * result + ((nomeCidade == null) ? 0 : nomeCidade.hashCode());
+		result = prime * result + ((nomeFormatado == null) ? 0 : nomeFormatado.hashCode());
+		result = prime * result + ((nomeMesorregiao == null) ? 0 : nomeMesorregiao.hashCode());
+		result = prime * result + ((regiaoNome == null) ? 0 : regiaoNome.hashCode());
+		result = prime * result + ((siglaEstado == null) ? 0 : siglaEstado.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DadoFormatado other = (DadoFormatado) obj;
+		if (idEstado != other.idEstado)
+			return false;
+		if (nomeCidade == null) {
+			if (other.nomeCidade != null)
+				return false;
+		} else if (!nomeCidade.equals(other.nomeCidade))
+			return false;
+		if (nomeFormatado == null) {
+			if (other.nomeFormatado != null)
+				return false;
+		} else if (!nomeFormatado.equals(other.nomeFormatado))
+			return false;
+		if (nomeMesorregiao == null) {
+			if (other.nomeMesorregiao != null)
+				return false;
+		} else if (!nomeMesorregiao.equals(other.nomeMesorregiao))
+			return false;
+		if (regiaoNome == null) {
+			if (other.regiaoNome != null)
+				return false;
+		} else if (!regiaoNome.equals(other.regiaoNome))
+			return false;
+		if (siglaEstado == null) {
+			if (other.siglaEstado != null)
+				return false;
+		} else if (!siglaEstado.equals(other.siglaEstado))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("DadoFormatado [idEstado=");

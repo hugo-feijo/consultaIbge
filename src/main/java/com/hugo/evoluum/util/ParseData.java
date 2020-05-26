@@ -15,6 +15,7 @@ public class ParseData {
 		dados.setNomeCidade(municipio.getNome());
 		
 		dados.setNomeFormatado(dados.getNomeCidade() + "/" + dados.getSiglaEstado());
+		
 		return dados;
 	}
 
