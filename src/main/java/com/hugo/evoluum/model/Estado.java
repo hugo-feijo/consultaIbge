@@ -8,6 +8,10 @@ public class Estado {
 	private long id;
 	private String sigla;
 	private Regiao regiao;
+	
+	public Estado() {
+		
+	}
 
 	public Estado(long id, String sigla, Regiao regiao) {
 		this.id = id;

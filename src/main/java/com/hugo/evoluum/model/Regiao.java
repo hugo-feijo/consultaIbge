@@ -11,6 +11,10 @@ public class Regiao {
 
 	private String nome;
 	
+	public Regiao() {
+		
+	}
+	
 	public Regiao(long id, String sigla, String nome) {
 		this.id = id;
 		this.sigla = sigla;

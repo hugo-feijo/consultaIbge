@@ -5,7 +5,7 @@ import com.hugo.evoluum.model.projection.DadoFormatado;
 
 public class ParseData {
 
-	public DadoFormatado MunicipioToDados(Municipio municipio) {
+	public static DadoFormatado MunicipioToDados(Municipio municipio) {
 		DadoFormatado dados = new DadoFormatado();
 
 		dados.setNomeMesorregiao(municipio.getMicrorregiao().getMesorregiao().getNome());

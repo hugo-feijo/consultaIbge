@@ -1,10 +1,18 @@
 package com.hugo.evoluum.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Mesorregiao {
 
 	private long id;
 	private String nome;
+	
+	@JsonProperty(value = "UF")
 	private UF uf;
+	
+	public Mesorregiao() {
+		
+	}
 	
 	public Mesorregiao(long id, String nome, UF uf) {
 		this.id = id;

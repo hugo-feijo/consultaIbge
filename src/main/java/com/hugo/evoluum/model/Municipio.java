@@ -6,6 +6,10 @@ public class Municipio {
 	private String nome;
 	private Microrregiao microrregiao;
 	
+	public Municipio() {
+		
+	}
+	
 	public Municipio(long id, String nome, Microrregiao microrregiao) {
 		this.id = id;
 		this.nome = nome;

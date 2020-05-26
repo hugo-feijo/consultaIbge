@@ -2,7 +2,6 @@ package com.hugo.evoluum.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,12 +15,6 @@ import com.hugo.evoluum.model.projection.DadoFormatado;
 @DisplayName("Parse Data deveria ")
 class ParseDataTest {
 
-	private ParseData inTest;
-	
-	@BeforeEach
-	void setUp() {
-		inTest = new ParseData();
-	}
 	
 	@DisplayName("Projetar os dados corretamente")
 	@Test
@@ -32,7 +25,7 @@ class ParseDataTest {
 		Microrregiao microrregiao = new Microrregiao(35035, "Adamantina", mesorregiao);
 		Municipio municipio = new Municipio(3500105, "Adamantina", microrregiao);
 		
-		DadoFormatado dado = inTest.MunicipioToDados(municipio);
+		DadoFormatado dado = ParseData.MunicipioToDados(municipio);
 		
 		assertEquals(dado.getNomeCidade(), municipio.getNome());
 		assertEquals(dado.getIdEstado(), uf.getId());

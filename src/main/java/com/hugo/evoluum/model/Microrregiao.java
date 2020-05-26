@@ -6,6 +6,10 @@ public class Microrregiao {
 	private String nome;
 	private Mesorregiao mesorregiao;
 
+	public Microrregiao() {
+		
+	}
+	
 	public Microrregiao(long id, String nome, Mesorregiao mesorregiao) {
 		this.id = id;
 		this.nome = nome;

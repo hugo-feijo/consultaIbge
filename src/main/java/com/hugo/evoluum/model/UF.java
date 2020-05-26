@@ -7,6 +7,10 @@ public class UF {
 	private String nome;
 	private Regiao regiao;
 	
+	public UF() {
+		
+	}
+	
 	public UF(long id, String sigla, String nome, Regiao regiao) {
 		this.id = id;
 		this.sigla = sigla;
