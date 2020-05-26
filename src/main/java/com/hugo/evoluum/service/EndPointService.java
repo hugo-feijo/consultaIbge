@@ -5,12 +5,15 @@ import java.util.List;
 
 import javax.management.BadAttributeValueExpException;
 
+import org.springframework.stereotype.Service;
+
 import com.hugo.evoluum.model.Estado;
 import com.hugo.evoluum.model.Municipio;
 import com.hugo.evoluum.model.projection.DadoFormatado;
 import com.hugo.evoluum.repository.IbgeRepository;
 import com.hugo.evoluum.util.ParseData;
 
+@Service
 public class EndPointService {
 
 	private IbgeRepository ibgeRepository;

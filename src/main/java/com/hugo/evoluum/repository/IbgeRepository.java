@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.management.BadAttributeValueExpException;
 
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import com.hugo.evoluum.model.Estado;
 import com.hugo.evoluum.model.Municipio;
 
+@Repository
 public class IbgeRepository {
 	
 	RestTemplate restTemplate = new RestTemplate();
