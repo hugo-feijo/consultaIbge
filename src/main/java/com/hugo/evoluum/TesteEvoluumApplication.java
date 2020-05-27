@@ -4,16 +4,18 @@ import java.util.logging.Logger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
+@EnableCaching
 public class TesteEvoluumApplication {
 
 	private static Logger LOG = Logger.getLogger(TesteEvoluumApplication.class.getName());
 	
 	public static void main(String[] args) {
-		LOG.info("Iniciando API");
+		LOG.info("... Iniciando API");
 		SpringApplication.run(TesteEvoluumApplication.class, args);
-		LOG.info("API iniciada e pronta para receber requisiçoes");
+		LOG.info("... API iniciada e pronta para receber requisiçoes");
 	}
 
 }

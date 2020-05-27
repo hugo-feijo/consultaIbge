@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javax.management.BadAttributeValueExpException;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.hugo.evoluum.model.Estado;
@@ -19,6 +20,8 @@ public class EndPointService {
 
 	Logger LOG = Logger.getLogger(EndPointService.class.getName());
 	
+	private static List<Municipio> municipios = new ArrayList<>();
+	private static List<DadoFormatado> dados = new ArrayList<>();
 	private IbgeRepository ibgeRepository;
 	
 	public EndPointService(IbgeRepository ibgeRepository) {
@@ -27,9 +30,19 @@ public class EndPointService {
 	}
 
 	public List<DadoFormatado> findAll() {
-		List<DadoFormatado> dados = new ArrayList<>();
+
+		if(municipios.isEmpty())
+			findAllMunicipios();
+		
+		if(dados.isEmpty())
+			municipios.forEach(municipio -> dados.add(ParseData.municipioToDados(municipio)));
+		
+		LOG.info("... Retornando dados formatados do EndPointService");
+		return dados;
+	}
+	@Cacheable("municipioByNomeCidade")
+	private void findAllMunicipios() {
 		List<Estado> estados = ibgeRepository.findAllEstados();
-		List<Municipio> municipios = new ArrayList<>();
 		
 		estados
 			.parallelStream()
@@ -42,33 +55,21 @@ public class EndPointService {
 						}
 				
 					});
-		
-		municipios.forEach(municipio -> dados.add(ParseData.municipioToDados(municipio)));
-		
-		LOG.info("... Retornando dados formatados do EndPointService");
-		return dados;
 	}
 
+	@Cacheable("municipioByNomeCidade")
 	public DadoFormatado findByNomeCidade(String nomeCidade) {
 		LOG.info("... Procurando em EndPointService cidade com o nome: " + nomeCidade);
 		DadoFormatado dado;
-		List<Estado> estados = ibgeRepository.findAllEstados();
-		List<Municipio> municipios = new ArrayList<>();
+		List<Municipio> municipiosFilter = new ArrayList<>();
+
+		if(municipios.isEmpty())
+			findAllMunicipios();
 		
-		for(int i=0; i<estados.size(); i++) {
-			try {
-				municipios = ibgeRepository.findAllMunicipios(estados.get(i).getSigla());
-				
-				municipios.removeIf(d -> !nomeCidade.equalsIgnoreCase(d.getNome()));
-				
-				if(!municipios.isEmpty())
-					break;
-			} catch (BadAttributeValueExpException e) {
-				e.printStackTrace();
-			}
-		}
+		municipiosFilter.addAll(municipios);
+		municipiosFilter.removeIf(d -> !nomeCidade.equalsIgnoreCase(d.getNome()));
 		
-		dado = ParseData.municipioToDados(municipios.get(0));
+		dado = ParseData.municipioToDados(municipiosFilter.get(0));
 			
 		return dado;
 	}

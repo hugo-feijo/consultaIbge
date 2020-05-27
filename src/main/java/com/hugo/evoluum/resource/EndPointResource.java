@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hugo.evoluum.model.projection.DadoFormatado;
@@ -48,8 +48,8 @@ public class EndPointResource {
 		ParseData.dadosFormatadosToCsv(dados, resp.getOutputStream());
 	}
 	
-	@GetMapping("/{nomeCidade}")
-	public ResponseEntity<?> findByNomeCidade(@PathVariable String nomeCidade) {
+	@GetMapping("/")
+	public ResponseEntity<?> findByNomeCidade(@RequestParam("nomeCidade") String nomeCidade) {
 		LOG.info("... Procurando em EndPointResource cidade com o nome: " + nomeCidade);
 		DadoFormatado dados = endPointService.findByNomeCidade(nomeCidade);
 		
