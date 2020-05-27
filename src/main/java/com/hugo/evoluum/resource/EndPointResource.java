@@ -2,6 +2,7 @@ package com.hugo.evoluum.resource;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,11 +21,15 @@ import com.hugo.evoluum.util.ParseData;
 @RequestMapping("/")
 public class EndPointResource {
 
+	Logger LOG = Logger.getLogger(EndPointResource.class.getName());
+	
 	@Autowired
 	private EndPointService endPointService;
 	
 	@GetMapping("/json")
 	public ResponseEntity<?> findAllJson() {
+		LOG.info("... Chamando requisição  em /json no EndPoint Resource");
+		
 		List<DadoFormatado> dados = endPointService.findAll();
 		
 		return ResponseEntity.ok(dados);

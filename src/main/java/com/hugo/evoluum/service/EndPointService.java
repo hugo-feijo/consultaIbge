@@ -2,6 +2,7 @@ package com.hugo.evoluum.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.management.BadAttributeValueExpException;
 
@@ -16,9 +17,12 @@ import com.hugo.evoluum.util.ParseData;
 @Service
 public class EndPointService {
 
+	Logger LOG = Logger.getLogger(EndPointService.class.getName());
+	
 	private IbgeRepository ibgeRepository;
 	
 	public EndPointService(IbgeRepository ibgeRepository) {
+		LOG.info("... Criando instancia de EndPointService");
 		this.ibgeRepository = ibgeRepository;
 	}
 
@@ -41,6 +45,7 @@ public class EndPointService {
 		
 		municipios.forEach(municipio -> dados.add(ParseData.municipioToDados(municipio)));
 		
+		LOG.info("Retornando dados formatados do EndPointService");
 		return dados;
 	}
 }
