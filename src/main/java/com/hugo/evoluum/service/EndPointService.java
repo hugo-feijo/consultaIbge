@@ -27,17 +27,19 @@ public class EndPointService {
 		List<Estado> estados = ibgeRepository.findAllEstados();
 		List<Municipio> municipios = new ArrayList<>();
 		
-		
-		estados.parallelStream().forEach(estado -> {
-			try {
-				municipios.addAll(ibgeRepository.findAllMunicipios(estado.getSigla()));
-			} catch (BadAttributeValueExpException e) {
-				e.printStackTrace();
-			}
+		estados
+			.parallelStream()
+			.forEach(
+					estado -> {
+						try {
+							municipios.addAll(ibgeRepository.findAllMunicipios(estado.getSigla()));
+						} catch (BadAttributeValueExpException e) {
+							e.printStackTrace();
+						}
 				
-		});
+					});
 		
-		municipios.forEach(municipio -> dados.add(ParseData.MunicipioToDados(municipio)));
+		municipios.forEach(municipio -> dados.add(ParseData.municipioToDados(municipio)));
 		
 		return dados;
 	}

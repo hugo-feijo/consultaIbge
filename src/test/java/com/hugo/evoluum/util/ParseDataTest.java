@@ -2,6 +2,11 @@ package com.hugo.evoluum.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -16,16 +21,26 @@ import com.hugo.evoluum.model.projection.DadoFormatado;
 class ParseDataTest {
 
 	
+	private Regiao regiao;
+	private UF uf;
+	private Mesorregiao mesorregiao;
+	private Microrregiao microrregiao;
+	private Municipio municipio;
+	
+	@BeforeEach
+	void setUp() {		
+		regiao = new Regiao(3, "SE", "Sudeste");
+		uf = new UF(35, "SP", "São Paulo", regiao);
+		mesorregiao = new Mesorregiao(3508, "Presidente Prudente", uf);
+		microrregiao = new Microrregiao(35035, "Adamantina", mesorregiao);
+		municipio = new Municipio(3500105, "Adamantina", microrregiao);
+	}
+	
 	@DisplayName("Projetar os dados corretamente")
 	@Test
 	void projetarDadosCorretamente() {
-		Regiao regiao = new Regiao(3, "SE", "Sudeste");
-		UF uf = new UF(35, "SP", "São Paulo", regiao);
-		Mesorregiao mesorregiao = new Mesorregiao(3508, "Presidente Prudente", uf);
-		Microrregiao microrregiao = new Microrregiao(35035, "Adamantina", mesorregiao);
-		Municipio municipio = new Municipio(3500105, "Adamantina", microrregiao);
 		
-		DadoFormatado dado = ParseData.MunicipioToDados(municipio);
+		DadoFormatado dado = ParseData.municipioToDados(municipio);
 		
 		assertEquals(dado.getNomeCidade(), municipio.getNome());
 		assertEquals(dado.getIdEstado(), uf.getId());
@@ -35,4 +50,10 @@ class ParseDataTest {
 		assertEquals("Adamantina/SP", dado.getNomeFormatado());
 	}
 
+	@DisplayName("Transformar dados para CSV")
+	@Test
+	void transformarDadosParaCsv() throws IOException {
+		List<DadoFormatado> dados = new ArrayList<>();
+		dados.add(ParseData.municipioToDados(municipio));
+	}
 }
