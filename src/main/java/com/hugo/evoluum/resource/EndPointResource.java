@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,5 +46,13 @@ public class EndPointResource {
 		
 		List<DadoFormatado> dados = endPointService.findAll();
 		ParseData.dadosFormatadosToCsv(dados, resp.getOutputStream());
+	}
+	
+	@GetMapping("/{nomeCidade}")
+	public ResponseEntity<?> findByNomeCidade(@PathVariable String nomeCidade) {
+		LOG.info("... Procurando em EndPointResource cidade com o nome: " + nomeCidade);
+		DadoFormatado dados = endPointService.findByNomeCidade(nomeCidade);
+		
+		return ResponseEntity.ok(dados);
 	}
 }

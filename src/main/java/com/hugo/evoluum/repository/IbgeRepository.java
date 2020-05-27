@@ -2,6 +2,7 @@ package com.hugo.evoluum.repository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -33,7 +34,7 @@ public class IbgeRepository {
 		LOG.info("... Buscando municipios do estado: " + UF);
 		List<Municipio> municipios = new ArrayList<>();
 		
-		municipios = Arrays.asList(restTemplate.getForObject(
+		Collections.addAll(municipios, restTemplate.getForObject(
 				"https://servicodados.ibge.gov.br/api/v1/localidades/estados/" + UF + "/municipios", Municipio[].class));
 		
 		if(municipios.isEmpty()) {

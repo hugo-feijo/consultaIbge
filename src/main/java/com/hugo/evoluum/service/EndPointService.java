@@ -45,7 +45,31 @@ public class EndPointService {
 		
 		municipios.forEach(municipio -> dados.add(ParseData.municipioToDados(municipio)));
 		
-		LOG.info("Retornando dados formatados do EndPointService");
+		LOG.info("... Retornando dados formatados do EndPointService");
 		return dados;
+	}
+
+	public DadoFormatado findByNomeCidade(String nomeCidade) {
+		LOG.info("... Procurando em EndPointService cidade com o nome: " + nomeCidade);
+		DadoFormatado dado;
+		List<Estado> estados = ibgeRepository.findAllEstados();
+		List<Municipio> municipios = new ArrayList<>();
+		
+		for(int i=0; i<estados.size(); i++) {
+			try {
+				municipios = ibgeRepository.findAllMunicipios(estados.get(i).getSigla());
+				
+				municipios.removeIf(d -> !nomeCidade.equalsIgnoreCase(d.getNome()));
+				
+				if(!municipios.isEmpty())
+					break;
+			} catch (BadAttributeValueExpException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		dado = ParseData.municipioToDados(municipios.get(0));
+			
+		return dado;
 	}
 }
