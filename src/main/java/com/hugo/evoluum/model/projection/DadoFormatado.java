@@ -1,7 +1,10 @@
 package com.hugo.evoluum.model.projection;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class DadoFormatado {
 
+	@ApiModelProperty(value = "Código da estados")
 	private long idEstado;
 	private String siglaEstado;
 	private String regiaoNome;
